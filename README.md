@@ -3,7 +3,28 @@
 Egyszerű raktárkezelő (Node.js + Express). Az adatokat helyben, a `data/db.json` fájlban tárolja,
 külső adatbázist és idegen fiókot nem használ.
 
-## Indítás
+**Online demó:** https://m00nsc0rched.github.io/waretrack/
+
+A demó szerver nélkül, a GitHub Pages-en fut: a fiókok és a raktáradatok csak abban a böngészőben
+tárolódnak, amelyben használod (localStorage), máshonnan nem látszanak.
+
+## Push-deploy
+
+Minden push a `main` ágra automatikusan újraépíti és élesíti a demót
+(`.github/workflows/pages.yml`, kb. 1 perc). Az állapotát a tároló **Actions** fülén látod.
+A demót a `scripts/build-pages.js` állítja össze: a `public/` oldalaihoz hozzáadja a `demo/demo.js`-t,
+amely a szerver helyett a böngészőben kezeli az adatokat.
+
+Változtatás feltöltése ebből a mappából (a git hordozható változatával):
+
+```powershell
+$git = "$env:USERPROFILE\Tools\MinGit-2.56.0.2-64-bit\cmd\git.exe"
+& $git add -A
+& $git commit -m "Mit változtattam"
+& $git push
+```
+
+## Indítás a saját gépen
 
 1. Kell hozzá Node.js. Ezen a gépen a hordozható változat itt van:
    `%USERPROFILE%\Tools\node-v24.22.0-win-x64`
