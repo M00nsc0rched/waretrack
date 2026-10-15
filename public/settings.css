@@ -1,0 +1,279 @@
+/* Settings menu, interface size and dark mode (see settings.js) */
+
+:root{
+--ui-scale:1;
+--settings-bg:#ffffff;
+--settings-text:#222222;
+--settings-muted:#666666;
+--settings-border:#d6dbe1;
+--settings-control:#f1f3f6;
+--settings-accent:#3498db;
+}
+
+html[data-theme="dark"]{
+color-scheme:dark;
+--settings-bg:#1f242b;
+--settings-text:#e3e6ea;
+--settings-muted:#9aa4b0;
+--settings-border:#3a424d;
+--settings-control:#2a3038;
+--settings-accent:#4aa3e0;
+}
+
+
+/* Interface size */
+
+html{
+zoom:var(--ui-scale);
+}
+
+/* zoom also scales vh units, so full-height parts divide it back out */
+body > .sidebar,
+.container:has(> .sidebar),
+body.auth-page{
+height:calc(100vh / var(--ui-scale));
+}
+
+/* at large sizes the sidebar scrolls, so its Settings entry stays reachable */
+body > .sidebar,
+.container:has(> .sidebar) > .sidebar{
+box-sizing:border-box;
+overflow-y:auto;
+}
+
+/* the menu itself keeps its size, so the A− / A+ buttons stay under the pointer */
+.settings-dialog,
+button.settings-button{
+zoom:calc(1 / var(--ui-scale));
+}
+
+
+/* Opener: floating button (pages without sidebar) */
+
+button.settings-button{
+position:fixed;
+top:16px;
+right:16px;
+z-index:1000;
+width:auto;
+margin:0;
+padding:8px 14px;
+grid-column:auto;
+background:var(--settings-bg);
+color:var(--settings-text);
+border:1px solid var(--settings-border);
+border-radius:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.15);
+font-size:14px;
+font-family:Arial, Helvetica, sans-serif;
+cursor:pointer;
+}
+
+button.settings-button:hover{
+background:var(--settings-control);
+}
+
+
+/* Opener: sidebar entry */
+
+.sidebar .settings-link{
+margin-top:10px;
+border-top:1px solid rgba(255,255,255,0.15);
+}
+
+
+/* Dialog */
+
+.settings-dialog{
+padding:0;
+border:1px solid var(--settings-border);
+border-radius:10px;
+background:var(--settings-bg);
+color:var(--settings-text);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+font-family:Arial, Helvetica, sans-serif;
+}
+
+.settings-dialog::backdrop{
+background:rgba(0,0,0,0.4);
+}
+
+.settings-panel{
+width:300px;
+padding:22px;
+}
+
+.settings-title{
+font-size:20px;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+.settings-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin:14px 0 8px;
+font-size:15px;
+}
+
+.settings-value{
+color:var(--settings-muted);
+font-variant-numeric:tabular-nums;
+}
+
+.settings-scale{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.settings-dialog button{
+width:auto;
+margin:0;
+padding:7px 12px;
+grid-column:auto;
+background:var(--settings-control);
+color:var(--settings-text);
+border:1px solid var(--settings-border);
+border-radius:6px;
+font-size:14px;
+cursor:pointer;
+}
+
+.settings-dialog button:hover{
+border-color:var(--settings-accent);
+background:var(--settings-control);
+}
+
+.settings-dialog button.settings-primary{
+background:var(--settings-accent);
+border-color:var(--settings-accent);
+color:#ffffff;
+}
+
+.settings-dialog input{
+margin:0;
+padding:0;
+border:0;
+}
+
+.settings-dialog input[type="range"]{
+flex:1;
+width:auto;
+accent-color:var(--settings-accent);
+}
+
+.settings-dialog input[type="checkbox"]{
+appearance:none;
+position:relative;
+flex:none;
+width:42px;
+height:24px;
+border-radius:12px;
+background:var(--settings-border);
+cursor:pointer;
+transition:background 0.15s;
+}
+
+.settings-dialog input[type="checkbox"]::before{
+content:"";
+position:absolute;
+top:3px;
+left:3px;
+width:18px;
+height:18px;
+border-radius:50%;
+background:#ffffff;
+transition:transform 0.15s;
+}
+
+.settings-dialog input[type="checkbox"]:checked{
+background:var(--settings-accent);
+}
+
+.settings-dialog input[type="checkbox"]:checked::before{
+transform:translateX(18px);
+}
+
+.settings-dialog input:focus-visible,
+.settings-dialog button:focus-visible{
+outline:2px solid var(--settings-accent);
+outline-offset:2px;
+}
+
+.settings-actions{
+display:flex;
+justify-content:flex-end;
+gap:10px;
+margin-top:22px;
+}
+
+
+/* Dark mode for the app pages */
+
+html[data-theme="dark"] body{
+background:#15181d;
+color:#e3e6ea;
+}
+
+html[data-theme="dark"] body.auth-page{
+background:linear-gradient(135deg,#1f5a2a,#0e2412);
+}
+
+html[data-theme="dark"] .card{
+background:#1f242b;
+box-shadow:0 4px 14px rgba(0,0,0,0.5);
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] .header{
+color:#e3e6ea;
+}
+
+html[data-theme="dark"] .card h3{
+color:#9aa4b0;
+}
+
+html[data-theme="dark"] .sidebar{
+background:#1a2029;
+}
+
+html[data-theme="dark"] .sidebar a:hover{
+background:#28313d;
+}
+
+html[data-theme="dark"] input:not([type="range"]):not([type="checkbox"]),
+html[data-theme="dark"] select{
+background:#2a3038;
+color:#e3e6ea;
+border-color:#3a424d;
+}
+
+html[data-theme="dark"] ::placeholder{
+color:#9aa4b0;
+opacity:1;
+}
+
+html[data-theme="dark"] th{
+background:#2a6496;
+}
+
+html[data-theme="dark"] th,
+html[data-theme="dark"] td{
+border-color:#333a44;
+}
+
+html[data-theme="dark"] tr:hover{
+background:#262c34;
+}
+
+html[data-theme="dark"] .stock-low{
+color:#ff6b6b;
+}
+
+html[data-theme="dark"] .link{
+color:#64b5f6;
+}

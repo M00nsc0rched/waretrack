@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="settings.css">
+<script src="settings.js"></script>
+
+<h2>Stock Ledger</h2>
+
+<table border="1">
+
+<tr>
+<th>Product</th>
+<th>Type</th>
+<th>Quantity</th>
+<th>Location</th>
+<th>Date</th>
+</tr>
+
+<tbody id="ledger"></tbody>
+
+</table>
+
+<script>
+
+fetch("/ledger")
+.then(res=>res.json())
+.then(data=>{
+
+const table = document.getElementById("ledger")
+
+data.forEach(l=>{
+
+table.innerHTML += `
+<tr>
+<td>${l.product}</td>
+<td>${l.type}</td>
+<td>${l.quantity}</td>
+<td>${l.location}</td>
+<td>${new Date(l.date).toLocaleString()}</td>
+</tr>
+`
+
+})
+
+})
+
+</script>

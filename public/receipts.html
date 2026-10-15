@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Receipts - WareTrack</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+display:flex;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:220px;
+background:#2c3e50;
+color:white;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px 0;
+border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar a{
+display:block;
+padding:12px 20px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#34495e;
+}
+
+/* Main Content */
+
+.main{
+margin-left:220px;
+padding:30px;
+width:100%;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+/* Card */
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+margin-bottom:30px;
+}
+
+/* Headings */
+
+h2{
+margin-top:0;
+color:#333;
+}
+
+/* Form */
+
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+button{
+grid-column:span 2;
+padding:12px;
+background:#27ae60;
+border:none;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1e8449;
+}
+
+
+
+</style>
+
+<link rel="stylesheet" href="settings.css">
+<script src="settings.js"></script>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<h2>WareTrack</h2>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="products.html">Products</a>
+<a href="receipts.html">Receipts</a>
+<a href="deliveries.html">Deliveries</a>
+<a href="transfers.html">Transfers</a>
+<a href="adjustments.html">Adjustments</a>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="container">
+
+<!-- Receipt Form -->
+
+<div class="card">
+
+<h2>New Receipt</h2>
+
+<form action="/receipts/create" method="POST">
+
+<input name="product" placeholder="Product Name" required>
+
+<input name="qty" type="number" placeholder="Quantity Received" required>
+
+<button>Receive Stock</button>
+
+</form>
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

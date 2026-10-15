@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WareTrack</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#4CAF50,#2e7d32);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.container{
+background:white;
+padding:35px;
+width:340px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#333;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+}
+
+button:hover{
+background:#388e3c;
+}
+
+.link{
+text-align:center;
+margin-top:12px;
+color:#1976d2;
+cursor:pointer;
+font-size:14px;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
+
+<script>
+
+function showSignup(){
+login.classList.add("hidden")
+signup.classList.remove("hidden")
+forgot.classList.add("hidden")
+}
+
+function showLogin(){
+signup.classList.add("hidden")
+login.classList.remove("hidden")
+forgot.classList.add("hidden")
+}
+
+function showForgot(){
+login.classList.add("hidden")
+signup.classList.add("hidden")
+forgot.classList.remove("hidden")
+}
+
+</script>
+
+<link rel="stylesheet" href="settings.css">
+<script src="settings.js"></script>
+
+</head>
+
+<body class="auth-page">
+
+<div class="container card">
+
+<!-- LOGIN -->
+
+<div id="login">
+
+<h2>WareTrack Login</h2>
+
+<form action="/login" method="POST">
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+
+</form>
+
+<div class="link" onclick="showSignup()">Create account</div>
+<div class="link" onclick="showForgot()">Forgot password</div>
+
+</div>
+
+
+<!-- SIGNUP -->
+
+<div id="signup" class="hidden">
+
+<h2>Create Account</h2>
+
+<form action="/signup" method="POST">
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Signup</button>
+
+</form>
+
+<div class="link" onclick="showLogin()">Back to Login</div>
+
+</div>
+
+
+<!-- FORGOT -->
+
+<div id="forgot" class="hidden">
+
+<h2>Forgot Password</h2>
+
+<form action="/send-otp" method="POST">
+
+<input type="email" name="email" placeholder="Enter Email" required>
+
+<button type="submit">Send OTP</button>
+
+</form>
+
+<div class="link" onclick="showLogin()">Back to Login</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

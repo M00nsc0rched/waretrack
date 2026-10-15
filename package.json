@@ -1,0 +1,16 @@
+{
+  "name": "waretrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build:pages": "node scripts/build-pages.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemailer": "^8.0.2",
+    "otp-generator": "^4.0.1"
+  }
+}

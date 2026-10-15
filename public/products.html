@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Products - WareTrack</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:220px;
+background:#2c3e50;
+color:white;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px 0;
+border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar a{
+display:block;
+padding:12px 20px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#34495e;
+color:white
+}
+
+/* MAIN CONTENT */
+
+.main{
+margin-left:220px;
+padding:30px;
+width:100%;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+/* Card style */
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+margin-bottom:30px;
+}
+
+h2{
+margin-top:0;
+color:#333;
+}
+
+/* Form */
+
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+button{
+grid-column:span 2;
+padding:12px;
+background:#3498db;
+border:none;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2980b9;
+}
+
+/* Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th,td{
+padding:12px;
+text-align:left;
+border-bottom:1px solid #ddd;
+}
+
+th{
+background:#3498db;
+color:white;
+}
+
+tr:hover{
+background:#f2f2f2;
+}
+
+.stock-low{
+color:red;
+font-weight:bold;
+}
+
+</style>
+
+<link rel="stylesheet" href="settings.css">
+<script src="settings.js"></script>
+
+</head>
+
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WareTrack</h2>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="products.html">Products</a>
+<a href="receipts.html">Receipts</a>
+<a href="deliveries.html">Deliveries</a>
+<a href="transfers.html">Transfers</a>
+<a href="adjustments.html">Adjustments</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<div class="container">
+
+<!-- Create Product -->
+
+<div class="card">
+
+<h2>Create Product</h2>
+
+<form action="/products/create" method="POST">
+
+<input name="name" placeholder="Product Name" required>
+<input name="sku" placeholder="SKU Code">
+<input name="category" placeholder="Category">
+<input name="unit" placeholder="Unit (kg, pcs, box)">
+<input name="stock" type="number" placeholder="Initial Stock">
+
+<button>Create Product</button>
+
+</form>
+
+</div>
+
+
+<!-- Product List -->
+
+<div class="card">
+
+<h2>Product Inventory</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>SKU</th>
+<th>Category</th>
+<th>Unit</th>
+<th>Stock</th>
+</tr>
+</thead>
+
+<tbody id="products"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+fetch("/products")
+.then(res=>res.json())
+.then(data=>{
+
+const table = document.getElementById("products")
+table.innerHTML=""
+
+data.forEach(p=>{
+
+let stockClass = p.stock < 10 ? "stock-low" : ""
+
+table.innerHTML += `
+<tr>
+<td>${p.name}</td>
+<td>${p.sku}</td>
+<td>${p.category}</td>
+<td>${p.unit}</td>
+<td class="${stockClass}">${p.stock}</td>
+</tr>
+`
+
+})
+
+})
+
+</script>
+
+</body>
+
+</html>

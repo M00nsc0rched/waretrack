@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="settings.css">
+<script src="settings.js"></script>
+
+<h2>Move History</h2>
+
+<ul id="historyList"></ul>
+
+<script>
+
+async function loadHistory(){
+
+const res=await fetch("/moves")
+
+const moves=await res.json()
+
+const list=document.getElementById("historyList")
+
+moves.forEach(m=>{
+const li=document.createElement("li")
+li.textContent=`${m.product} | ${m.type} | ${m.quantity}`
+list.appendChild(li)
+})
+
+}
+
+loadHistory()
+
+</script>
