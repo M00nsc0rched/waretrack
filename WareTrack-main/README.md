@@ -67,7 +67,9 @@ python3 -m http.server 8000
 
 ## Settings
 
-Open Menu → **Settings**, or the sliders button in the top bar:
+Open Menu → **Beállítások**, or the sliders button beside the WareTrack menu in the top bar.
+The button stays available on small screens too. Press `,` to open it directly, or use
+[the direct settings link](https://m00nsc0rched.github.io/waretrack/game/?settings=1).
 
 - **Interface size:** 70% to 125%. It scales the menus, panels and buttons; the 3D yard keeps its size (zoom it with the wheel or a pinch). When the window is too narrow for the chosen size, the game shows it smaller (never below 100%) and says so in Settings.
 - **Dark mode:** dark panels and menus, and a darker sky and fog over the yard.

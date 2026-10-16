@@ -136,6 +136,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--cobalt);outline
 .ibtn svg{width:16px;height:16px}
 .ibtn:hover{color:var(--ink)}
 .ibtn[aria-pressed="true"]{background:var(--safety);color:var(--ink)}
+#setBtn{flex:none;color:var(--cobalt);background:var(--cobalt-soft)}
+#setBtn span{display:inline}
 .call{height:34px;padding:0 12px;border-radius:10px;background:var(--cobalt);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .call svg{width:15px;height:15px}
 .call:hover{filter:brightness(1.08)}
@@ -332,7 +334,7 @@ body.building .track,body.building .leftcol,body.building .kpis{display:none}
 
 /* modal */
 .modal{position:fixed;inset:0;z-index:5;background:var(--scrim);display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px);overflow:auto}
-.sheet{width:min(900px,100%);max-height:100%;overflow:auto;background:var(--glass-solid);border-radius:18px;box-shadow:0 20px 60px rgba(20,34,60,.25);padding:22px;display:flex;flex-direction:column}
+.sheet{box-sizing:border-box;width:min(900px,calc((100vw - 32px) / var(--ui)));max-height:calc((100vh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)) / var(--ui));max-height:calc((100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)) / var(--ui));overflow:auto;background:var(--glass-solid);border-radius:18px;box-shadow:0 20px 60px rgba(20,34,60,.25);padding:22px}
 .sheet h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:26px;letter-spacing:-.02em;text-wrap:balance}
 .sheet .lede{margin:4px 0 0;color:var(--ink-2);font-size:13.5px;max-width:62ch;line-height:1.45}
 .m-top{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
@@ -345,9 +347,9 @@ body.building .track,body.building .leftcol,body.building .kpis{display:none}
 .rankcard b{display:block;font-size:13px}
 .rankcard small{display:block;color:var(--ink-3);font-size:11px}
 .rankcard .meter{width:120px}
-.mnav{display:flex;gap:4px;margin-top:16px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.mnav{position:sticky;top:0;z-index:1;display:flex;flex-wrap:wrap;gap:4px;margin-top:16px;border-bottom:1px solid var(--line);background:var(--glass-solid)}
 .mnav::-webkit-scrollbar{display:none}
-.mnav button{padding:10px 12px;font-weight:700;font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.mnav button{flex:none;padding:10px 12px;font-weight:700;font-size:13px;color:var(--ink-3);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .mnav button[aria-selected="true"]{color:var(--ink);border-color:var(--cobalt)}
 .mnav .dot{width:7px;height:7px;border-radius:50%;background:var(--flame)}
 .mbody{padding-top:16px}
@@ -539,6 +541,7 @@ input[type=range]{width:140px;accent-color:var(--cobalt)}
 @media (max-width:1280px){ .search{display:none} }
 @media (max-width:1160px){ .kpi:nth-child(4){display:none} .site{display:none} .lvl .xp{display:none} }
 @media (max-width:980px){
+  #setBtn span{display:none}
   .kpi{min-width:0}
   .kpi:nth-child(3){display:none}
   .track-side{display:none}
@@ -548,9 +551,9 @@ input[type=range]{width:140px;accent-color:var(--cobalt)}
   .combo small{display:none}
 }
 @media (max-width:760px){
-  .bar{gap:5px;padding:6px;top:calc(env(safe-area-inset-top,0px) + 8px);left:10px;right:10px}
+  .bar{gap:5px;padding:6px;top:calc(env(safe-area-inset-top,0px) + 8px);left:10px;right:10px;overflow-x:auto;scrollbar-width:thin}
   .brand{font-size:0;gap:2px;padding:4px}
-  .brand .chev,.lvl,#soundBtn,#setBtn{display:none}
+  .brand .chev,.lvl,#soundBtn{display:none}
   .clock{padding:4px 8px;font-size:11px}
   .clock .lbl{display:none}
   .combo{padding:5px 7px;font-size:12px}
@@ -671,6 +674,7 @@ input[type=range]{width:140px;accent-color:var(--cobalt)}
       WareTrack
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
+    <button class="ibtn" id="setBtn" aria-label="Beállítások" aria-haspopup="dialog" aria-controls="sheet" title="Beállítások: felületméret, sötét mód, hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span lang="hu">Beállítások</span></button>
     <label class="search" for="q">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" placeholder="Search trucks, forklifts, SKUs…" autocomplete="off">
@@ -690,7 +694,6 @@ input[type=range]{width:140px;accent-color:var(--cobalt)}
     <button class="ibtn" id="buildBtn" aria-pressed="false" title="Build mode (B)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6 4 4M3 21l9-9M12.5 4.5 16 1l7 7-3.5 3.5z"/><path d="m11 13 3-3"/></svg><span>Build</span></button>
     <button class="ibtn bell" id="bellBtn" aria-label="Notifications" aria-haspopup="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="bdg" id="bellN" hidden>0</span></button>
     <button class="ibtn" id="soundBtn" aria-label="Sound on" title="Sound"><svg id="soundIc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg></button>
-    <button class="ibtn" id="setBtn" aria-label="Settings" title="Settings: interface size, dark mode, sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg></button>
     <button class="lvl" id="lvlChip" aria-label="Profile"><span class="n" id="lvlN">1</span><span class="who"><b id="lvlRank">Trainee</b><small id="lvlSub">Level 1</small><span class="xp"><i id="lvlXp"></i></span></span></button>
     <button class="call" id="callTruck" title="Book an extra inbound truck">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Call truck</span>
@@ -3805,7 +3808,7 @@ function renderModal(){
     const t=game.menuTab, inShift=game.phase==='shift', today=todayKey(), D=dailySpec(today), doneToday=save.daily.last===today;
     h+=menuHeader();
     const achN=Object.keys(save.ach).length;
-    h+='<div class="mnav" role="tablist">'+[['play','Play'],['daily','Daily challenge',!doneToday],['up','Shop'],['ach','Achievements '+achN+'/'+ACH.length],['me','Profile'],['set','Settings']].map(([k,l,dot])=>'<button role="tab" data-mtab="'+k+'" aria-selected="'+(t===k)+'">'+l+(dot?'<span class="dot"></span>':'')+'</button>').join('')+'</div><div class="mbody">';
+    h+='<div class="mnav" role="tablist">'+[['play','Play'],['set','Beállítások'],['daily','Daily challenge',!doneToday],['up','Shop'],['ach','Achievements '+achN+'/'+ACH.length],['me','Profile']].map(([k,l,dot])=>'<button role="tab" data-mtab="'+k+'" aria-selected="'+(t===k)+'">'+l+(dot?'<span class="dot"></span>':'')+'</button>').join('')+'</div><div class="mbody">';
     if(t==='play'){
       const s=SITES[game.menuSel],G=s.goals;
       if(!save.tutorial&&!inShift) h+='<div class="banner"><div><b>New here? Take the training shift</b><span>A guided shift at Northgate that teaches docks, orders, combos and problems in about two minutes. +50 credits.</span></div><button class="btn primary" data-a="tutorial">'+ICON.play+'Start training</button></div>';
@@ -3953,6 +3956,7 @@ $('#home').onclick=()=>{view.azT=Math.round((view.azT-Math.PI/4)/TAU)*TAU+Math.P
 const q=$('#q');
 addEventListener('keydown',e=>{
   if(e.target&&(e.target.tagName==='INPUT'&&e.target!==q))return;
+  if(e.key===','&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&document.activeElement!==q){e.preventDefault();openMenu('set');return;}
   if(!$('#modal').hidden){if(e.key==='Escape'&&modalView==='menu'){if(game.phase==='shift'){closeModal();setSpeed(prevSpeed||1);}else{closeModal();setSpeed(1);}}return;}
   if(document.activeElement===q){if(e.key==='Escape')q.blur();return;}
   if(e.key==='/'){e.preventDefault();q.focus();}
@@ -4077,7 +4081,7 @@ function boot(){
   loadSite(game.menuSel);
   addEventListener('resize',resize);
   setSpeed(1); renderIncident(); syncSoundBtn();
-  game.menuTab=save.daily.last!==todayKey()&&save.tutorial&&save.stats.shifts>0?'daily':'play';
+  game.menuTab=new URLSearchParams(location.search).get('settings')==='1'?'set':save.daily.last!==todayKey()&&save.tutorial&&save.stats.shifts>0?'daily':'play';
   welcomeBack(); setInterval(writeSave,20000); document.addEventListener('visibilitychange',writeSave);
   openModal('menu');
   setTimeout(hideHint,14000);
