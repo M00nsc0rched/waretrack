@@ -1,6 +1,7 @@
 // Builds the static GitHub Pages demo into _site/: copies public/, adds
 // demo/demo.js (browser-only data instead of the server) to every page
-// and serves login.html as the start page.
+// and serves login.html as the start page. The standalone 3D game is
+// published alongside the demo at /game/.
 
 const fs = require("fs")
 const path = require("path")
@@ -28,4 +29,9 @@ fs.writeFileSync(page, html.replace(settingsTag, `${settingsTag}\n<script src="d
 
 fs.copyFileSync(path.join(out, "login.html"), path.join(out, "index.html"))
 
-console.log(`GitHub Pages demo built in ${out}`)
+const gameOut = path.join(out, "game")
+fs.mkdirSync(gameOut, { recursive:true })
+fs.copyFileSync(path.join(root, "WareTrack-main", "index.html"), path.join(gameOut, "index.html"))
+fs.writeFileSync(path.join(out, ".nojekyll"), "")
+
+console.log(`GitHub Pages demo and game built in ${out}`)

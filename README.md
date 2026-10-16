@@ -3,17 +3,23 @@
 Egyszerű raktárkezelő (Node.js + Express). Az adatokat helyben, a `data/db.json` fájlban tárolja,
 külső adatbázist és idegen fiókot nem használ.
 
-**Online demó:** https://m00nsc0rched.github.io/waretrack/
+**3D raktárjáték:** https://m00nsc0rched.github.io/waretrack/game/
+
+**Raktárkezelő demó:** https://m00nsc0rched.github.io/waretrack/
+
+A játék forrása a `WareTrack-main/` mappában van. A Beállítások menüben a felület
+70–125% között méretezhető, és bekapcsolható a sötét mód; mindkettőt a böngésző megjegyzi.
 
 A demó szerver nélkül, a GitHub Pages-en fut: a fiókok és a raktáradatok csak abban a böngészőben
 tárolódnak, amelyben használod (localStorage), máshonnan nem látszanak.
 
 ## Push-deploy
 
-Minden push a `main` ágra automatikusan újraépíti és élesíti a demót
+Minden push a `main` ágra automatikusan újraépíti és élesíti a demót és a játékot
 (`.github/workflows/pages.yml`, kb. 1 perc). Az állapotát a tároló **Actions** fülén látod.
 A demót a `scripts/build-pages.js` állítja össze: a `public/` oldalaihoz hozzáadja a `demo/demo.js`-t,
-amely a szerver helyett a böngészőben kezeli az adatokat.
+amely a szerver helyett a böngészőben kezeli az adatokat. A játék `index.html` fájlját
+az `_site/game/` mappába másolja, így az a fenti `/game/` linken indul.
 
 Változtatás feltöltése ebből a mappából (a git hordozható változatával):
 
